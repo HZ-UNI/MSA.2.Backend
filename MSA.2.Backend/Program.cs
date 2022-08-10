@@ -14,7 +14,11 @@ builder.Services.AddSwaggerDocument(options =>
 builder.Services.AddHttpClient("reddit", configureClient: client =>
 {
     client.BaseAddress = new Uri("https://www.reddit.com/dev/api");
-    // client.BaseAddress = new Uri("https://rickandmortyapi.com/");
+});
+
+builder.Services.AddHttpClient("rickandmorty", configureClient: client =>
+{
+    client.BaseAddress = new Uri("https://rickandmortyapi.com/");
 });
 
 var app = builder.Build();
