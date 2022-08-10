@@ -24,9 +24,12 @@ namespace MSA._2.Backend.Controllers
         [HttpGet]
         [Route("character search")]
         [ProducesResponseType(200)]
-        public async Task<IActionResult> GetRickAndMortyCharacter (string characterName)
+        // [ProducesResponseType(400)]
+        public async Task<IActionResult> GetRickAndMortyCharacter(string characterName)
         {
-            var res = await _client.GetAsync("/?name=" + characterName);
+            if (string.IsNullOrEmpty(characterName)) return BadRequest("The input cannot be empty");
+            
+            var res = await _client.GetAsync("/character/?name=" + characterName);
             var content = await res.Content.ReadAsStringAsync();
 
             return Ok(content);

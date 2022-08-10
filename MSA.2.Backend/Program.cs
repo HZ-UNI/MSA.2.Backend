@@ -16,9 +16,9 @@ builder.Services.AddHttpClient("reddit", configureClient: client =>
     client.BaseAddress = new Uri("https://www.reddit.com/dev/api");
 });
 
-builder.Services.AddHttpClient("rickandmorty", configureClient: client =>
+builder.Services.AddHttpClient(builder.Configuration["RickAndMortyClientName"], configureClient =>
 {
-    client.BaseAddress = new Uri("https://rickandmortyapi.com/");
+    configureClient.BaseAddress = new Uri(builder.Configuration["RickAndMortyAddress"]);
 });
 
 var app = builder.Build();
